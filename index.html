@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Jeff's Bookmarks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 24px;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .card-title .material-icons {
+            margin-right: 8px;
+            color: #4f46e5;
+        }
+        .category-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #4b5563;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s ease-in-out;
+        }
+        .category-title::before {
+            content: '›';
+            font-size: 1.5em;
+            margin-right: 8px;
+            transition: transform 0.2s ease-in-out;
+            color: #9ca3af;
+            font-weight: 300;
+            line-height: 1;
+        }
+        .category-title:hover {
+            color: #4f46e5;
+        }
+        .category-title:hover::before {
+            color: #4f46e5;
+        }
+        .sub-folder {
+            display: none;
+            margin-left: 1.5rem;
+            border-left: 2px solid #e5e7eb;
+            padding-left: 1rem;
+        }
+        .sub-folder.active {
+            display: block;
+        }
+        .sub-folder.active + .category-title::before {
+            transform: rotate(90deg);
+        }
+        .bookmark-link {
+            display: block;
+            font-size: 0.875rem;
+            color: #6b7280;
+            padding: 4px 0;
+            transition: all 0.2s ease-in-out;
+            text-decoration: none;
+            position: relative;
+        }
+        .bookmark-link:hover {
+            color: #4f46e5;
+            transform: translateX(4px);
+        }
+    </style>
+    <script>
+        function toggleAllSubFolders() {
+            const subFolders = document.querySelectorAll('.sub-folder');
+            const allFolded = Array.from(subFolders).every(folder => !folder.classList.contains('active'));
+            
+            subFolders.forEach(folder => {
+                folder.classList.toggle('active', allFolded);
+            });
+        }
+
+        function toggleSubFolder(id) {
+            const folder = document.getElementById(id);
+            folder.classList.toggle('active');
+        }
+
+        function toggleCardFolders(cardId) {
+            const card = document.getElementById(cardId);
+            const subFolders = card.querySelectorAll('.sub-folder');
+            const allFolded = Array.from(subFolders).every(folder => !folder.classList.contains('active'));
+            
+            subFolders.forEach(folder => {
+                folder.classList.toggle('active', allFolded);
+            });
+        }
+    </script>
+</head>
+<body class="p-8">
+    <header class="mb-12 text-center">
+        <h1 class="text-4xl font-bold text-gray-800" onclick="toggleAllSubFolders()">Jeff's Bookmarks</h1>
+        <p class="text-lg text-gray-600 mt-2">jeff.xiu@iff.com</p>
+    </header>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Digital Tools Section -->
+        <div class="card">
+            <h2 class="card-title" onclick="toggleCardFolders('digital-tools')"><span class="material-icons">build_circle</span>Digital Tools</h2>
+            <div id="digital-tools">
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s1sub1')">Regional PI</h3>
+                    <div id="s1sub1" class="sub-folder">
+                        <a class="bookmark-link" href="https://wuxipp03.global.iff.com/PIVision/" target="_blank">APAC PI Vision</a>
+                        <a class="bookmark-link" href="https://cphvmntosi01p.global.iff.com/pivision/#" target="_blank">Central PI Vision</a>
+                        <a class="bookmark-link" href="https://cphvmntosi01p.global.iff.com/pivision/admin" target="_blank">Central PI Integrator</a>
+                        <a class="bookmark-link" href="https://nltbpiviwbpv1.global.iff.com/pivision/#" target="_blank">EMEA PI Vision</a>
+                        <a class="bookmark-link" href="http://usabosipiwbpv1.global.iff.com/PIVision/#/All/" target="_blank">AMERICAS PI Vision</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s1sub2')">Local PI</h3>
+                    <div id="s1sub2" class="sub-folder">
+                        <a class="bookmark-link" href="https://hankpp03.global.iff.com/pivision/#/" target="_blank">Hanko PI Vision</a>
+                        <a class="bookmark-link" href="https://brugpp03.global.iff.com/PIVision/#/" target="_blank">Bruge PI Vision</a>
+                        <a class="bookmark-link" href="https://belopp03.global.iff.com/pivision/#/" target="_blank">Beloit PI Vision</a>
+                        <a class="bookmark-link" href="https://cedapp03.global.iff.com/pivision/#/" target="_blank">Cedar PI Vision</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s1sub3')">PI Web API</h3>
+                    <div id="s1sub3" class="sub-folder">
+                        <a class="bookmark-link" href="https://wuxipp02.global.iff.com/PIWEBAPI" target="_blank">China PI webapi</a>
+                        <a class="bookmark-link" href="https://corpit55.global.iff.com/piwebapi/" target="_blank">Centra PI webapi</a>
+                        <a class="bookmark-link" href="https://cphvmntint01p.global.iff.com/" target="_blank">PI Integrator</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s1sub4')">Seeq</h3>
+                    <div id="s1sub4" class="sub-folder">
+                        <a class="bookmark-link" href="https://iff.seeq.site/login?code=xWeuun4_bSoK7oMtpAJOZTPja6Bha8QcRfPYGLm5KU0&state=rJZ91kuBK_PYEK2uQKUl56prRRWXqpBNByOEsG3fHKc" target="_blank">IFF Seeq</a>
+                        <a class="bookmark-link" href="https://www.seeq.org/index.php?/forums" target="_blank">Seeq Forums</a>
+                        <a class="bookmark-link" href="https://python-docs.seeq.com/user_guide/spy.login.html" target="_blank">seeq spy</a>
+                        <a class="bookmark-link" href="https://training.seeq.com/learn" target="_blank">seeq spy</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s1sub5')">LiveViwer</h3>
+                    <div id="s1sub5" class="sub-folder">
+                        <a class="bookmark-link" href="http://brugge-do-dev.global.iff.com/" target="_blank">Liveviwer-Brugge</a>
+                        <a class="bookmark-link" href="http://jamsa-do-dev.global.iff.com/" target="_blank">Liveviwer-Jamsa</a>
+                        <a class="bookmark-link" href="http://rochester-do-dev.global.iff.com/" target="_blank">Liveviwer-Rochester</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s1sub6')">TMODS</h3>
+                    <div id="s1sub6" class="sub-folder">
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/OP-AutomationProcessControlCOE/SitePages/DuPont(TM)-TMODS-Online-Courses.aspx" target="_blank">TMODS-Online-Courses</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/OP-AutomationProcessControlCOE/SitePages/Download-DuPont%E2%84%A2-TMODS.aspx" target="_blank">TMODS-Download</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/OP-AutomationProcessControlCOE/" target="_blank">AutomationProcessControlCOE</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/teams/TMODSDeveloperCourse/Shared%20Documents/Forms/AllItems.aspx?FolderCTID=0x01200001F4EBA852D61E48BD20DED561D8519A&id=%2Fteams%2FTMODSDeveloperCourse%2FShared%20Documents%2FGeneral" target="_blank">TMODS Developer Course</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s1sub7')">Traksys</h3>
+                    <div id="s1sub7" class="sub-folder">
+                        <a class="bookmark-link" href="http://wuxitraksys.global.iff.com/TS/pages/home/" target="_blank">Traksys-Wuxi</a>
+                        <a class="bookmark-link" href="http://kunsdi13.global.iff.com/TS/pages/home" target="_blank">Traksys-Kunshan</a>
+                        <a class="bookmark-link" href="https://cnjdtrkdbpv1.global.iff.com/TS/pages/jiande/g/" target="_blank">Traksys-Jiande</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s1sub8')">Firewall</h3>
+                    <div id="s1sub8" class="sub-folder">
+                        <a class="bookmark-link" href="https://usabtufinappv2.global.iff.com/v2/" target="_blank">Tufin</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SharePoint Section -->
+        <div class="card">
+            <h2 class="card-title" onclick="toggleCardFolders('sharepoint')"><span class="material-icons">share</span>SharePoint</h2>
+            <div id="sharepoint">
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s2sub1')">Wuxi</h3>
+                    <div id="s2sub1" class="sub-folder">
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/OP-NB-AP-JW-C" target="_blank">Main</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-AP-JW-Tech" target="_blank">Tech</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-AP-JW-Op" target="_blank">Ops</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-AP-JW-MTC" target="_blank">Maint</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-AP-JW-Op/Planning/Forms/AllItems.aspx" target="_blank">Planning</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-AP-JW-Op/DryBlend/Forms/AllItems.aspx" target="_blank">Dryblending</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-AP-JW-QAQC/qaqc/Forms/AllItems.aspx" target="_blank">QAQC</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-AP-JW-Wuxi" target="_blank">Wuxi</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/teams/teams_nb_wuxi-technology" target="_blank">teams_nb_wuxi-technology</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s2sub2')">IFF Digital</h3>
+                    <div id="s2sub2" class="sub-folder">
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/teams/DigitalOps_Academy/" target="_blank">DigitalOps_Academy</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/OP-OTT?&OR=Teams-HL&CT=1724811859325&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNDA4MDIxMjAwOCIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D" target="_blank">OTT Traking Tool</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/teams/DigitalOps_Analytics/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FDigitalOps%5FAnalytics%2FShared%20Documents%2FData%20Structures%2C%20IT%2C%20OT%20%26%20MES&viewid=a91c1b28%2Da32b%2D4a5c%2D8f43%2D469fe0314999&OR=Teams%2DHL&CT=1692782411587&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIyNy8yMzA3MTMyNzExNiIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D" target="_blank">Data Automation</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-NHCI/OpexAcademy/SitePages/Lean-Six-Sigma-Green-Belt-Training.aspx?OR=Teams-HL&CT=1708497651615&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNDAyMDIwNTUwOSIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D" target="_blank">Lean Six Sigma Green Belt Training</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/teams/DigitalOps_Analytics/" target="_blank">DigitalOps_Analytics</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/OP-engtls" target="_blank">Engineering Tools and Systems</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s2sub3')">IFF Function</h3>
+                    <div id="s2sub3" class="sub-folder">
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-EcoSys/SitePages/Project-Documentation.aspx" target="_blank">NB-EcoSys</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/ETQReliance/SitePages/EtQ%20Reliance%20Information.aspx" target="_blank">Etq</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s2sub4')">IFF DataAutomation</h3>
+                    <div id="s2sub4" class="sub-folder">
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-IB_GlobalDeltaVRingteam/SitePages/root/default.aspx" target="_blank">GlobalDeltaVRingteam</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-IB_GlobalBIRingteam/SitePages/root/default.aspx" target="_blank">GlobalBIRingteam</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s2sub5')">IFF IT</h3>
+                    <div id="s2sub5" class="sub-folder">
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/IT-ProjectNeptune/Shared%20Documents/Forms/AllItems.aspx?csf=1&web=1&e=fJCxJE&cid=4156fe71%2D2454%2D4eca%2D8315%2Db2b4e41c7833&FolderCTID=0x012000C4CF70DD90A5DB45A657781C8900EE17&id=%2Fsites%2FIT%2DProjectNeptune%2FShared%20Documents%2F2%2E%20Delivery%2FTSA%2F3%2E%20TSA%2D03%2FRegions%2FGA%2FPO&viewid=a326efbc%2Dc08c%2D4cb7%2D9dd8%2De32c9bf9d409" target="_blank">Project Neptune-GA</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/IT-ProjectNeptune/Shared%20Documents/Forms/AllItems.aspx?FolderCTID=0x012000C4CF70DD90A5DB45A657781C8900EE17&id=%2Fsites%2FIT%2DProjectNeptune%2FShared%20Documents%2F2%2E%20Delivery%2FTSA%2F3%2E%20TSA%2D03%2FSite%20Applications%2FPlaybooks%2FEMEA%2FStade&viewid=a326efbc%2Dc08c%2D4cb7%2D9dd8%2De32c9bf9d409" target="_blank">Project Neptune-Stade</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/IT-ProjectNeptune/Shared%20Documents/Forms/AllItems.aspx?csf=1&web=1&e=pxGEeA&OR=Teams%2DHL&CT=1692841029184&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIyNy8yMzA3MTMyNzExNiIsIkhhc0ZlZGVyYXRlZFVzZXIiOnRydWV9&cid=3a09af83%2D7022%2D4f94%2Da5b7%2D199887050ac0&FolderCTID=0x012000C4CF70DD90A5DB45A657781C8900EE17&id=%2Fsites%2FIT%2DProjectNeptune%2FShared%20Documents%2F2%2E%20Delivery%2FTSA%2F3%2E%20TSA%2D03%2FWorkstreams%2FTCOM%2FTCOM%20Sites%20Migration%20Docs%2FGA%20Region%2F1089%20%2D%20Jiangsu%20Kunshan&viewid=a326efbc%2Dc08c%2D4cb7%2D9dd8%2De32c9bf9d409" target="_blank">Project Neptune-Kunshan</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/IT-ProjectNeptune/Shared%20Documents/Forms/AllItems.aspx?csf=1&web=1&e=pxGEeA&OR=Teams%2DHL&CT=1692841029184&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiIyNy8yMzA3MTMyNzExNiIsIkhhc0ZlZGVyYXRlZFVzZXIiOnRydWV9&cid=3a09af83%2D7022%2D4f94%2Da5b7%2D199887050ac0&FolderCTID=0x012000C4CF70DD90A5DB45A657781C8900EE17&id=%2Fsites%2FIT%2DProjectNeptune%2FShared%20Documents%2F2%2E%20Delivery%2FTSA%2F3%2E%20TSA%2D03%2FWorkstreams%2FTCOM%2FTCOM%20Sites%20Migration%20Docs%2FGA%20Region%2F1090%20%2D%20Jiangsu%20Wuxi" target="_blank">Project Neptune-Wuxi</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/teams/IFFManageServices/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FIFFManageServices%2FShared%20Documents%2FGeneral%2FNetwork%2FIFF%20AUTOMATION&viewid=52ea4140%2Dbbbd%2D4427%2Db9c1%2D8709a7677ab3" target="_blank">IFFManageServices-IFF AUTOMATION</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/teams/IFFManageServices/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FIFFManageServices%2FShared%20Documents%2FGeneral&viewid=52ea4140%2Dbbbd%2D4427%2Db9c1%2D8709a7677ab3" target="_blank">IFFManageServices-IFF AUTOMATION</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/teams/AWSTargetArchitecture/Shared%20Documents/Forms/AllItems.aspx?csf=1&web=1&e=NaYZkj&OR=Teams%2DHL&CT=1713855815440&clickparams=eyJBcHBOYW1lIjoiVGVhbXMtRGVza3RvcCIsIkFwcFZlcnNpb24iOiI0OS8yNDAzMzEwMTgxMyIsIkhhc0ZlZGVyYXRlZFVzZXIiOmZhbHNlfQ%3D%3D&cid=184f4d40%2Ddc31%2D4757%2Db7de%2Dee3941733c2e&FolderCTID=0x01200000B549AF162E854CA47D64F66133A914&id=%2Fteams%2FAWSTargetArchitecture%2FShared%20Documents%2FGeneral%2FOperations%2FNSP%2FOnboarding" target="_blank">NSP</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s2sub6')">PI TagDict</h3>
+                    <div id="s2sub6" class="sub-folder">
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-AP-JK-Tech/Operation/Forms/AllItems.aspx?e=5%3A92117713eb7243babb29ef9d1c0ad527&sharingv2=true&fromShare=true&at=9&CID=10a835c6%2Daab0%2D45d3%2D826a%2D556d527beee6&FolderCTID=0x012000829D093054330943AEE2BD9560B2F33B&id=%2Fsites%2FNB%2DAP%2DJK%2DTech%2FOperation%2FPI%20vision" target="_blank">Kunshan</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/sites/NB-AP-JW-Tech/PIMS/Forms/AllItems.aspx?id=%2Fsites%2FNB%2DAP%2DJW%2DTech%2FPIMS%2F0%2DData%20Dictionary&viewid=4c7d04d0%2D9150%2D4b78%2D95cf%2D5cdcef863bd6" target="_blank">Wuxi</a>
+                        <a class="bookmark-link" href="https://iff.sharepoint.com/teams/PI-Jiande/Shared%20Documents/Forms/AllItems.aspx?id=%2Fteams%2FPI%2DJiande%2FShared%20Documents%2FGeneral%2F0%5FDataDictionary&viewid=9ccc1d35%2D1e1f%2D4ef5%2D80e4%2De772ce41f334&FolderCTID=0x0120006F80F2F0F6826F4892D26EB7A5997510" target="_blank">Jiande</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Office Section -->
+        <div class="card">
+            <h2 class="card-title" onclick="toggleCardFolders('office')"><span class="material-icons">business_center</span>Office</h2>
+            <div id="office">
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s3sub1')">Portal</h3>
+                    <div id="s3sub1" class="sub-folder">
+                        <a class="bookmark-link" href="https://myapps.microsoft.com/" target="_blank">Myapps</a>
+                        <a class="bookmark-link" href="https://us2.concursolutions.com/home" target="_blank">Concur</a>
+                        <a class="bookmark-link" href="https://online.bcdtravel.cn/" target="_blank">BCD Travel</a>
+                        <a class="bookmark-link" href="http://securelogon.iff.com/" target="_blank">Secure Logon</a>
+                        <a class="bookmark-link" href="https://entra.microsoft.com/" target="_blank">Microsoft Entra</a>
+                        <a class="bookmark-link" href="https://myadp.adponehr.com/" target="_blank">ADP</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s3sub2')">ToolKit</h3>
+                    <div id="s3sub2" class="sub-folder">
+                        <a class="bookmark-link" href="https://excalidraw.com/" target="_blank">excalidraw</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s3sub3')">PowerBI</h3>
+                    <div id="s3sub3" class="sub-folder">
+                        <a class="bookmark-link" href="https://app.powerbi.com/groups/f684edb4-78c4-4ce2-8e76-dc8f3d4a20cf/list?tenant=a2a9bf31-fc44-425c-a6d2-3ae9379573ea&UPN=Jeff.Xiu@iff.com" target="_blank">Workspace</a>
+                        <a class="bookmark-link" href="https://app.powerbi.com/groups/me/apps/1377c860-67d0-4190-95f2-4b3e7bafe1a4/reports/20265fc2-9592-494a-9129-b81110f0e5a8/ReportSection2fb2c3b86c0035e3cb21?experience=power-bi" target="_blank">OTT3.0 Dashboard</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s3sub4')">WUXIPYAPV1 App</h3>
+                    <div id="s3sub4" class="sub-folder">
+                        <a class="bookmark-link" href="http://wuxipyapv1:8888/lab" target="_blank">Wuxi JupyterLab</a>
+                        <a class="bookmark-link" href="http://wuxipyapv1:8502/" target="_blank">Wuxi Streamlit Ferm pH</a>
+                        <a class="bookmark-link" href="http://wuxipyapv1:8503/" target="_blank">Wuxi Streamlit DB Report</a>
+                        <a class="bookmark-link" href="http://wuxipyapv1:8504/" target="_blank">Wuxi Streamlit Ferm Lab</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IT Section -->
+        <div class="card">
+            <h2 class="card-title" onclick="toggleCardFolders('it')"><span class="material-icons">computer</span>IT</h2>
+            <div id="it">
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s4sub1')">ServiceNow</h3>
+                    <div id="s4sub1" class="sub-folder">
+                        <a class="bookmark-link" href="https://iffprod.service-now.com/iff_ec" target="_blank">ServiceConnect</a>
+                        <a class="bookmark-link" href="https://iffprod.service-now.com/now/nav/ui/classic/params/target/task_list.do%3Fsysparm_userpref_module%3D2ccb50dfc61122820032728dcea648fe%26sysparm_query%3Dassignment_groupDYNAMICd6435e965f510100a9ad2572f2b47744%255Eactive%253Dtrue%255Eassignment_groupNOT%2BLIKESkill%255Esys_class_name%2521%253Dpm_project_task%255Esys_class_name%2521%253Dsysapproval_group%255Esys_class_name%2521%253Dsc_request%255Esys_class_name%2521%253Dsc_req_item%255Esys_class_name%2521%253Dincident%255ENQassignment_groupDYNAMICd6435e965f510100a9ad2572f2b47744%255Eactive%253Dtrue%255Eref_incident.incident_state%2521%253D6%255EEQ" target="_blank">Tasks</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s4sub2')">rto</h3>
+                    <div id="s4sub2" class="sub-folder">
+                        <a class="bookmark-link" href="https://wuxipp01-rto.global.iff.com/" target="_blank">wuxipp01-rt0</a>
+                        <a class="bookmark-link" href="https://wuxipp03-rto.global.iff.com/" target="_blank">wuxipp03-rto</a>
+                        <a class="bookmark-link" href="https://wuxiwsus-rto.global.iff.com/" target="_blank">wuxiwsus-rto</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Collection Section -->
+        <div class="card">
+            <h2 class="card-title" onclick="toggleCardFolders('collection')"><span class="material-icons">collections_bookmark</span>Collection</h2>
+            <div id="collection">
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s5sub1')">Knowledge Base</h3>
+                    <div id="s5sub1" class="sub-folder">
+                        <a class="bookmark-link" href="https://www.aveva.com/en/perspectives/presentations/" target="_blank">Aveva World Presentation</a>
+                        <a class="bookmark-link" href="https://www.resources.com" target="_blank">Team Resources</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documentation Section -->
+        <div class="card">
+            <h2 class="card-title" onclick="toggleCardFolders('documentation')"><span class="material-icons">description</span>Documentation</h2>
+            <div id="documentation">
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s6sub1')">Guides</h3>
+                    <div id="s6sub1" class="sub-folder">
+                        <a class="bookmark-link" href="https://docs.iff.com" target="_blank">IFF Docs</a>
+                        <a class="bookmark-link" href="https://guides.iff.com" target="_blank">Technical Guides</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Section -->
+        <div class="card">
+            <h2 class="card-title" onclick="toggleCardFolders('community')"><span class="material-icons">people</span>Community</h2>
+            <div id="community">
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s7sub1')">Hub</h3>
+                    <div id="s7sub1" class="sub-folder">
+                        <a class="bookmark-link" href="https://www.avevacommunity.com/#/Home/FenceDetail?id=02ff680a-e399-45af-aecf-5b440b314b9a" target="_blank">Aveva Community</a>
+                        <a class="bookmark-link" href="https://guardian.emersonprocess.com/" target="_blank">Emerson Guardian</a>
+                        <a class="bookmark-link" href="https://customers.osisoft.com/s/" target="_blank">PI SRP</a>
+                        <a class="bookmark-link" href="https://softwaresupport.aveva.com/" target="_blank">Aveva Support</a>
+                        <a class="bookmark-link" href="https://account.acronis.com/#/products/" target="_blank">Acronis</a>
+                        <a class="bookmark-link" href="https://sg-cloud.acronis.com/ui/#/dashboards" target="_blank">Acronis Cloud</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Repositories Section -->
+        <div class="card">
+            <h2 class="card-title" onclick="toggleCardFolders('repositories')"><span class="material-icons">folder_open</span>Repositories</h2>
+            <div id="repositories">
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s8sub1')">SVG Icon</h3>
+                    <div id="s8sub1" class="sub-folder">
+                        <a class="bookmark-link" href="https://www.svgrepo.com/" target="_blank">SVG Repo</a>
+                        <a class="bookmark-link" href="https://freesvgicons.com/" target="_blank">Free svg icon</a>
+                        <a class="bookmark-link" href="https://pictogrammers.com/" target="_blank">pictogrammers</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s8sub2')">Remove Bg</h3>
+                    <div id="s8sub2" class="sub-folder">
+                        <a class="bookmark-link" href="https://www.adobe.com/express/feature/image/remove-background" target="_blank">Adobe Remove Bg</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s8sub3')">UI Design</h3>
+                    <div id="s8sub3" class="sub-folder">
+                        <a class="bookmark-link" href="https://stitch.withgoogle.com/" target="_blank">Stitch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Section -->
+        <div class="card">
+            <h2 class="card-title" onclick="toggleCardFolders('training')"><span class="material-icons">school</span>Training</h2>
+            <div id="training">
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s9sub1')">Online Courses</h3>
+                    <div id="s9sub1" class="sub-folder">
+                        <a class="bookmark-link" href="https://www.coursera.org" target="_blank">Coursera</a>
+                        <a class="bookmark-link" href="https://www.udemy.com" target="_blank">Udemy</a>
+                        <a class="bookmark-link" href="https://www.linkedin.com/learning/" target="_blank">Linkedin Learning</a>
+                        <a class="bookmark-link" href="https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-load-data" target="_blank">MS Fabric</a>
+                        <a class="bookmark-link" href="https://esi.microsoft.com/landing" target="_blank">Copilot Training</a>
+                        <a class="bookmark-link" href="https://medium.com/" target="_blank">Medium</a>
+                        <a class="bookmark-link" href="https://www.kaggle.com/" target="_blank">Kaggle</a>
+                        <a class="bookmark-link" href="https://towardsdatascience.com/" target="_blank">towardsdatascience</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="category-title" onclick="toggleSubFolder('s9sub2')">YouTube</h3>
+                    <div id="s9sub2" class="sub-folder">
+                        <a class="bookmark-link" href="https://www.youtube.com/@GuyInACube/videos" target="_blank">GuyInCube</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
